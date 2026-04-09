@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduBot — Learn Smarter</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- TOP NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">EduBot</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Courses</a>
+      <a href="#">My Learning</a>
+      <a href="#">Community</a>
+    </div>
+    <button class="nav-btn">Sign In</button>
+  </nav>
+
+  <!-- MAIN LAYOUT: courses left, chat right -->
+  <div class="main">
+
+    <!-- LEFT: COURSE PANEL -->
+    <div class="courses-panel">
+      <h2 class="panel-heading">Browse Courses</h2>
+      <p class="panel-sub">Ask EduBot about any course →</p>
+
+      <div class="course-card" onclick="askBot('Tell me about Python Programming')">
+        <div class="course-icon" style="background:#E6F1FB;">🐍</div>
+        <div class="course-info">
+          <div class="course-title">Python Programming</div>
+          <div class="course-meta">8 weeks · Beginner</div>
+          <div class="course-price">₹4,999</div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="askBot('Tell me about Web Development')">
+        <div class="course-icon" style="background:#EAF3DE;">🌐</div>
+        <div class="course-info">
+          <div class="course-title">Web Development</div>
+          <div class="course-meta">10 weeks · Beginner</div>
+          <div class="course-price">₹5,999</div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="askBot('Tell me about Data Science')">
+        <div class="course-icon" style="background:#EEEDFE;">📊</div>
+        <div class="course-info">
+          <div class="course-title">Data Science & ML</div>
+          <div class="course-meta">12 weeks · Intermediate</div>
+          <div class="course-price">₹7,999</div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="askBot('Tell me about Cybersecurity')">
+        <div class="course-icon" style="background:#FAECE7;">🔐</div>
+        <div class="course-info">
+          <div class="course-title">Cybersecurity</div>
+          <div class="course-meta">6 weeks · Beginner</div>
+          <div class="course-price">₹4,499</div>
+        </div>
+      </div>
+
+      <div class="course-card" onclick="askBot('Tell me about UI UX Design')">
+        <div class="course-icon" style="background:#E1F5EE;">🎨</div>
+        <div class="course-info">
+          <div class="course-title">UI/UX Design</div>
+          <div class="course-meta">8 weeks · Beginner</div>
+          <div class="course-price">₹3,999</div>
+        </div>
+      </div>
+
+      <div class="quick-links">
+        <div class="ql-title">Quick Questions</div>
+        <button onclick="askBot('fees')">Fee Structure</button>
+        <button onclick="askBot('schedule')">Class Schedule</button>
+        <button onclick="askBot('enroll')">How to Enroll</button>
+        <button onclick="askBot('certificate')">Certificates</button>
+        <button onclick="askBot('contact')">Contact Support</button>
+      </div>
+    </div>
+
+    <!-- RIGHT: CHAT PANEL -->
+    <div class="chat-panel">
+      <div class="chat-header">
+        <div class="chat-avatar">E</div>
+        <div class="chat-header-info">
+          <div class="chat-name">EduBot Assistant</div>
+          <div class="chat-status"><span class="status-dot"></span>Online</div>
+        </div>
+        <button class="clear-btn" onclick="clearChat()">Clear</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+          <div class="bubble">
+            👋 Hi! I'm <strong>EduBot</strong>, your edtech assistant.<br/>
+            Ask me about courses, fees, schedules, or enrollment.<br/>
+            Type <code>help</code> to see all commands.
+          </div>
+          <div class="msg-time">Just now</div>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="chat-input-area">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type a message or command..."
+          autocomplete="off"
+          onkeydown="if(event.key==='Enter') sendMessage()"
+        />
+        <button class="send-btn" onclick="sendMessage()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+  <footer style="text-align:center; padding:10px; font-size:12px; color:#6b7280; background:white; border-top:1px solid #e5e7eb;">
+  EduBot — Edtech Chatbot | Built by Sherin | Python + Flask
+</footer>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
