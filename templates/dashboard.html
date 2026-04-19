@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EduBot — Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f3f4f6;color:#1a1a2e;}
+.navbar{display:flex;align-items:center;padding:0 2rem;height:60px;background:#0f3460;color:white;gap:2rem;}
+.nav-logo{display:flex;align-items:center;gap:8px;}
+.logo-text{font-size:20px;font-weight:700;}
+.nav-links{display:flex;gap:1.5rem;flex:1;}
+.nav-links a{color:rgba(255,255,255,0.75);text-decoration:none;font-size:14px;}
+.nav-links a:hover{color:white;}
+.nav-links a.active{color:#e94560;font-weight:600;}
+.container{max-width:1200px;margin:0 auto;padding:2rem;}
+.page-title{font-size:24px;font-weight:700;color:#0f3460;margin-bottom:0.5rem;}
+.page-sub{font-size:14px;color:#6b7280;margin-bottom:2rem;}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem;}
+.metric-card{background:white;border-radius:12px;padding:1.25rem;border:1px solid #e5e7eb;}
+.metric-label{font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
+.metric-value{font-size:28px;font-weight:700;color:#0f3460;}
+.metric-sub{font-size:12px;color:#6b7280;margin-top:4px;}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem;}
+.chart-card{background:white;border-radius:12px;padding:1.25rem;border:1px solid #e5e7eb;}
+.chart-title{font-size:15px;font-weight:600;color:#1a1a2e;margin-bottom:1rem;}
+.full-width{grid-column:1/-1;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+th{background:#0f3460;color:white;padding:10px 14px;text-align:left;font-weight:500;}
+td{padding:10px 14px;border-bottom:1px solid #e5e7eb;color:#374151;}
+tr:hover td{background:#f9fafb;}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:500;}
+.badge-blue{background:#E6F1FB;color:#0C447C;}
+.badge-green{background:#EAF3DE;color:#27500A;}
+.badge-red{background:#FCEBEB;color:#A32D2D;}
+.badge-purple{background:#EEEDFE;color:#3C3489;}
+.badge-orange{background:#FAECE7;color:#712B13;}
+.no-data{text-align:center;padding:2rem;color:#9ca3af;font-size:14px;}
+@media(max-width:768px){.metrics-grid{grid-template-columns:repeat(2,1fr);}.charts-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-logo">
+    <span style="font-size:22px;">⬡</span>
+    <span class="logo-text">EduBot</span>
+  </div>
+  <div class="nav-links">
+    <a href="/">Courses</a>
+    <a href="#">My Learning</a>
+    <a href="#">Community</a>
+    <a href="/dashboard" class="active">Dashboard</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="page-title">Analytics Dashboard</div>
+  <div class="page-sub">EduBot query analytics + Udemy courses dataset insights</div>
+
+  <!-- METRIC CARDS -->
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Total Queries</div>
+      <div class="metric-value">{{ analytics.total_queries }}</div>
+      <div class="metric-sub">Since server start</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Udemy Courses</div>
+      <div class="metric-value">{{ analytics.udemy.total_courses if analytics.udemy else 'N/A' }}</div>
+      <div class="metric-sub">In dataset</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Paid Courses</div>
+      <div class="metric-value">{{ analytics.udemy.paid_count if analytics.udemy else 'N/A' }}</div>
+      <div class="metric-sub">From Udemy dataset</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Avg Course Price</div>
+      <div class="metric-value">${{ analytics.udemy.avg_price if analytics.udemy else 'N/A' }}</div>
+      <div class="metric-sub">Udemy USD average</div>
+    </div>
+  </div>
+
+  <!-- CHARTS ROW -->
+  <div class="charts-grid">
+    <!-- Category Donut -->
+    <div class="chart-card">
+      <div class="chart-title">Query Categories</div>
+      {% if analytics.category_counts %}
+      <canvas id="donutChart" height="260"></canvas>
+      {% else %}
+      <div class="no-data">No queries yet. Start chatting with EduBot to see data here.</div>
+      {% endif %}
+    </div>
+
+    <!-- Udemy Subject Bar -->
+    <div class="chart-card">
+      <div class="chart-title">Udemy Courses by Subject</div>
+      {% if analytics.udemy %}
+      <canvas id="subjectChart" height="260"></canvas>
+      {% else %}
+      <div class="no-data">Dataset not loaded.</div>
+      {% endif %}
+    </div>
+
+    <!-- Daily Query Line -->
+    <div class="chart-card full-width">
+      <div class="chart-title">Daily Query Trend</div>
+      {% if analytics.daily_counts %}
+      <canvas id="lineChart" height="120"></canvas>
+      {% else %}
+      <div class="no-data">No query history yet.</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- TOP KEYWORDS TABLE -->
+  <div class="chart-card" style="margin-bottom:2rem;">
+    <div class="chart-title">Top Keywords Asked</div>
+    {% if analytics.top_keywords %}
+    <table>
+      <thead>
+        <tr><th>#</th><th>Keyword</th><th>Count</th><th>Category</th></tr>
+      </thead>
+      <tbody>
+        {% for keyword, count in analytics.top_keywords %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><strong>{{ keyword }}</strong></td>
+          <td>{{ count }}</td>
+          <td>
+            {% if 'fee' in keyword or 'cost' in keyword %}
+              <span class="badge badge-green">Fees</span>
+            {% elif 'course' in keyword or 'python' in keyword or 'data' in keyword %}
+              <span class="badge badge-blue">Courses</span>
+            {% elif 'enroll' in keyword or 'register' in keyword %}
+              <span class="badge badge-purple">Enrollment</span>
+            {% elif 'hello' in keyword or 'hi' in keyword %}
+              <span class="badge badge-orange">Greeting</span>
+            {% else %}
+              <span class="badge badge-red">Other</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="no-data">No queries recorded yet. Use the chatbot first.</div>
+    {% endif %}
+  </div>
+
+  <!-- UDEMY DATASET TABLE -->
+  {% if analytics.udemy %}
+  <div class="chart-card">
+    <div class="chart-title">Udemy Dataset Summary</div>
+    <table>
+      <thead>
+        <tr><th>Metric</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Total Courses</td><td><strong>{{ analytics.udemy.total_courses }}</strong></td></tr>
+        <tr><td>Paid Courses</td><td><strong>{{ analytics.udemy.paid_count }}</strong></td></tr>
+        <tr><td>Free Courses</td><td><strong>{{ analytics.udemy.free_count }}</strong></td></tr>
+        <tr><td>Total Subscribers</td><td><strong>{{ "{:,}".format(analytics.udemy.total_subscribers) }}</strong></td></tr>
+        <tr><td>Average Price (USD)</td><td><strong>${{ analytics.udemy.avg_price }}</strong></td></tr>
+        {% for subject, count in analytics.udemy.subjects.items() %}
+        <tr><td>{{ subject }} Courses</td><td><strong>{{ count }}</strong></td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+</div>
+
+<script>
+{% if analytics.category_counts %}
+const donutCtx = document.getElementById('donutChart').getContext('2d');
+new Chart(donutCtx, {
+  type: 'doughnut',
+  data: {
+    labels: {{ analytics.category_counts.keys() | list | tojson }},
+    datasets: [{
+      data: {{ analytics.category_counts.values() | list | tojson }},
+      backgroundColor: ['#378ADD','#1D9E75','#7F77DD','#D85A30','#BA7517','#D4537E','#639922','#888780'],
+      borderWidth: 2,
+      borderColor: '#ffffff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 12 } } }
+    }
+  }
+});
+{% endif %}
+
+{% if analytics.udemy %}
+const subjectCtx = document.getElementById('subjectChart').getContext('2d');
+new Chart(subjectCtx, {
+  type: 'bar',
+  data: {
+    labels: {{ analytics.udemy.subjects.keys() | list | tojson }},
+    datasets: [{
+      label: 'Number of Courses',
+      data: {{ analytics.udemy.subjects.values() | list | tojson }},
+      backgroundColor: ['#378ADD','#1D9E75','#7F77DD','#D85A30'],
+      borderRadius: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#f3f4f6' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+{% endif %}
+
+{% if analytics.daily_counts %}
+const lineCtx = document.getElementById('lineChart').getContext('2d');
+new Chart(lineCtx, {
+  type: 'line',
+  data: {
+    labels: {{ analytics.daily_counts.keys() | list | tojson }},
+    datasets: [{
+      label: 'Queries per Day',
+      data: {{ analytics.daily_counts.values() | list | tojson }},
+      borderColor: '#0f3460',
+      backgroundColor: 'rgba(15,52,96,0.08)',
+      borderWidth: 2,
+      pointBackgroundColor: '#e94560',
+      pointRadius: 5,
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#f3f4f6' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+{% endif %}
+</script>
+
+</body>
+</html>

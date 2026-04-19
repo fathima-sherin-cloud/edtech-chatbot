@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2026-04-19 20:33:46",
+    "date": "2026-04-19",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-19 20:34:00",
+    "date": "2026-04-19",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-19 20:34:45",
+    "date": "2026-04-19",
+    "message": "i need to know about python course",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-19 20:35:07",
+    "date": "2026-04-19",
+    "message": "Tell me about Web Development",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-19 20:35:55",
+    "date": "2026-04-19",
+    "message": "exact duration for cybersecurity",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-19 20:36:09",
+    "date": "2026-04-19",
+    "message": "duration",
+    "category": "other"
+  }
+]
