@@ -34,5 +34,203 @@
     "date": "2026-04-19",
     "message": "duration",
     "category": "other"
+  },
+  {
+    "timestamp": "2026-04-20 12:24:15",
+    "date": "2026-04-20",
+    "message": "hi",
+    "category": "greetings"
+  },
+  {
+    "timestamp": "2026-04-20 12:24:30",
+    "date": "2026-04-20",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-20 12:25:20",
+    "date": "2026-04-20",
+    "message": "hello",
+    "category": "greetings"
+  },
+  {
+    "timestamp": "2026-04-22 10:46:13",
+    "date": "2026-04-22",
+    "message": "hi",
+    "category": "greetings"
+  },
+  {
+    "timestamp": "2026-04-22 11:49:11",
+    "date": "2026-04-22",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-22 11:49:43",
+    "date": "2026-04-22",
+    "message": "courses",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-22 11:49:50",
+    "date": "2026-04-22",
+    "message": "python",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-22 11:50:01",
+    "date": "2026-04-22",
+    "message": "fees",
+    "category": "fees"
+  },
+  {
+    "timestamp": "2026-04-22 11:57:25",
+    "date": "2026-04-22",
+    "message": "about",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-22 11:59:35",
+    "date": "2026-04-22",
+    "message": "clear",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-22 12:22:38",
+    "date": "2026-04-22",
+    "message": "hello",
+    "category": "greetings"
+  },
+  {
+    "timestamp": "2026-04-22 12:22:50",
+    "date": "2026-04-22",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-22 12:22:55",
+    "date": "2026-04-22",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-22 12:23:19",
+    "date": "2026-04-22",
+    "message": "fees",
+    "category": "fees"
+  },
+  {
+    "timestamp": "2026-04-22 12:23:22",
+    "date": "2026-04-22",
+    "message": "schedule",
+    "category": "schedule"
+  },
+  {
+    "timestamp": "2026-04-22 12:23:32",
+    "date": "2026-04-22",
+    "message": "enroll",
+    "category": "enrollment"
+  },
+  {
+    "timestamp": "2026-04-22 12:23:36",
+    "date": "2026-04-22",
+    "message": "certificate",
+    "category": "certificate"
+  },
+  {
+    "timestamp": "2026-04-22 12:23:44",
+    "date": "2026-04-22",
+    "message": "contact",
+    "category": "contact"
+  },
+  {
+    "timestamp": "2026-04-25 20:37:17",
+    "date": "2026-04-25",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-25 20:37:23",
+    "date": "2026-04-25",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-25 20:37:35",
+    "date": "2026-04-25",
+    "message": "contact",
+    "category": "contact"
+  },
+  {
+    "timestamp": "2026-04-28 12:41:02",
+    "date": "2026-04-28",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-28 12:41:12",
+    "date": "2026-04-28",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-28 12:41:38",
+    "date": "2026-04-28",
+    "message": "i would like to know more about courses",
+    "category": "courses"
+  },
+  {
+    "timestamp": "2026-04-28 12:42:24",
+    "date": "2026-04-28",
+    "message": "okay, what about the fees ?",
+    "category": "fees"
+  },
+  {
+    "timestamp": "2026-04-28 12:43:03",
+    "date": "2026-04-28",
+    "message": "class modes is it online or offline/",
+    "category": "schedule"
+  },
+  {
+    "timestamp": "2026-04-28 12:43:29",
+    "date": "2026-04-28",
+    "message": "schedule",
+    "category": "schedule"
+  },
+  {
+    "timestamp": "2026-04-29 01:26:30",
+    "date": "2026-04-29",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-29 01:29:41",
+    "date": "2026-04-29",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-29 10:44:57",
+    "date": "2026-04-29",
+    "message": "hy",
+    "category": "other"
+  },
+  {
+    "timestamp": "2026-04-29 10:45:01",
+    "date": "2026-04-29",
+    "message": "help",
+    "category": "help"
+  },
+  {
+    "timestamp": "2026-04-29 10:52:53",
+    "date": "2026-04-29",
+    "message": "hi",
+    "category": "greetings"
+  },
+  {
+    "timestamp": "2026-04-29 10:55:17",
+    "date": "2026-04-29",
+    "message": "Tell me about Python Programming",
+    "category": "courses"
   }
 ]
